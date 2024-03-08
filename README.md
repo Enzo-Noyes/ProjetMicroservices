@@ -23,44 +23,7 @@ score_service : Gère le stockage et la mise à jour des scores des joueurs.
 webapp_service : Fournit une interface utilisateur web pour l'authentification et l'interaction avec les autres services.
 
 
-Architecture Technique du Système de Microservices
-
-
-
-                                         +------------------------------------------+
-                                         |           webapp_service                 |
-                                         +---------------------------+--------------+
-                                         |   Interface utilisateur | Interface   |
-                                         |   web                   | de présentation |
-                                         |   (Flask)               |                |
-                                         |                          |               |
-                                         |   - Gère les requêtes    |                |
-                                         |     utilisateur vers les |                |
-                                         |     autres microservices |                |
-                                         +---------------------------+--------------+
-                                                                    |
-                                                                    |
-                                                                    |
-                         +------------------------------------------+----------------------------------+
-                         |                          |                          |                      |
-                         |                          |                          |                      |
-                         |                          |                          |                      |
-                         |                          |                          |                      |
-                         |                          |                          |                      |
-                         |                          |                          |                      |
-+-------------------------------------------+  +-----------------------------------+   +------------------------+
-|                 auth_service               |  |             motus_service         |   |        score_service   |
-+-------------------------------------------+  +-----------------------------------+   +------------------------+
-|  Gestion de l'authentification des        |  |  Logique du jeu de devinettes    |   |  Stockage et mise à jour|
-|  utilisateurs (Flask)                     |  |  Motus (Flask)                   |   |  des scores (Flask)     |
-|                                           |  |                                   |   |                          |
-|  - Endpoints pour l'authentification      |  |  - Endpoints pour jouer au jeu    |   |  - Endpoints pour mettre |
-|    des utilisateurs                       |  |    de devinettes                   |   |    à jour les scores    |
-|  - Gère la vérification des               |  |  - Communique avec score_service  |   |  - Communique avec       |
-|    informations d'identification         |  |    pour mettre à jour les scores  |   |    webapp_service pour   |
-|  - Stocke les informations des           |  |  - Utilise une liste de mots      |   |    récupérer les scores  |
-|    utilisateurs dans une base de données |  |    prédéfinis pour le jeu         |   +------------------------+
-+-------------------------------------------+  +-----------------------------------+
+Architecture Technique du Système de Microservices (voir diagramme d'architecture)
 
 
 Chaque boîte représente un microservice avec ses fonctionnalités spécifiques.
