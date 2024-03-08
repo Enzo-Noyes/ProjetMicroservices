@@ -1,0 +1,42 @@
+version: '3'
+services:
+  motus:
+    build:
+      context: ./motus_service
+      dockerfile: Dockerfile
+    ports:
+      - "5003:5003"
+    depends_on:
+      - score
+    volumes:
+      - ./motus_service:/app
+
+  score:
+    build:
+      context: ./score_service
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    depends_on:
+      - auth
+    volumes:
+      - ./score_service:/app
+
+  auth:
+    build:
+      context: ./auth_service
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./auth_service:/app
+
+  webapp:
+    build:
+      context: ./webapp_service
+      dockerfile: Dockerfile
+    ports:
+      - "5004:5004"
+    volumes:
+      - ./webapp_service:/app
+
